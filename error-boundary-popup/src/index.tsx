@@ -25,7 +25,7 @@ const Form = () => {
 };
 
 const CustomComponent = () => {
-  return <div>this is a custom error</div>;
+  return <div className="ErrorBoundaryCard">this is a custom error</div>;
 };
 
 function App() {

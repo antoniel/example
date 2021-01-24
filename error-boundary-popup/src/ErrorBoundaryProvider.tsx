@@ -6,13 +6,15 @@ interface HOCErrorProps {
   fallback?: React.ReactElement;
 }
 
-const defaultComponent = <div>Default error component</div>;
+const DefaultComponent = () => (
+  <div className="ErrorBoundaryCard">Default error component</div>
+);
+
 const HOCError: React.FC<HOCErrorProps> = ({
-  fallback = defaultComponent,
+  fallback = <DefaultComponent />,
   updateParent,
   ms = 5000,
 }) => {
-  console.log(fallback);
   React.useEffect(() => {
     setTimeout(() => updateParent(), ms);
   }, [updateParent, ms]);
