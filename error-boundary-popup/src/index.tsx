@@ -15,10 +15,12 @@ const Form = () => {
     })();
 
   return (
-    <div>
-      <label htmlFor="username">Username</label>
+    <form>
+      <label className="block" htmlFor="username">
+        Don't type <code>fail</code>
+      </label>
       <input onChange={handleChange} />
-    </div>
+    </form>
   );
 };
 
@@ -28,9 +30,13 @@ const CustomComponent = () => {
 
 function App() {
   return (
-    <ErrorBoundaryProvider fallback={<CustomComponent />}>
-      <Form key="aqueleForm" />
-    </ErrorBoundaryProvider>
+    <div className="container">
+      <div className="wrapper">
+        <ErrorBoundaryProvider fallback={<CustomComponent />}>
+          <Form />
+        </ErrorBoundaryProvider>
+      </div>
+    </div>
   );
 }
 

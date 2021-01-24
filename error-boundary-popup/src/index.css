@@ -8,6 +8,26 @@ body {
 }
 
 code {
+  background-color: #cecece;
+  border-radius: 2px;
+  padding: 0px 5px;
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container{
+  min-height:100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+}
+
+.wrapper form label{
+  margin-bottom: 16px;
+}
+
+
+.block{
+  display: block
+}
+
