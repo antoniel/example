@@ -1,48 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-
-const ChecksMountAndUnmount = ({ children, where = "''" }: any) => {
-  React.useEffect(() => {
-    console.log("mounted", where);
-    return () => console.log("unmounted");
-  }, []);
-
-  return <React.Fragment>{children}</React.Fragment>;
-};
-class ErrorBoundaryProvider extends React.Component {
-  readonly state: { hasError: boolean };
-  constructor(props: any) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError(error: any) {
-    // Atualiza o state para que a próxima renderização mostre a UI alternativa.
-    return { hasError: true };
-  }
-
-  render() {
-    if (this.state.hasError) {
-      // Você pode renderizar qualquer UI alternativa
-      console.log(this.props.children);
-      return (
-        <ChecksMountAndUnmount where="insede error">
-          <h1>Algo deu errado.</h1>
-          {this.props.children}
-        </ChecksMountAndUnmount>
-      );
-    }
-
-    return (
-      <React.Fragment>
-        <ChecksMountAndUnmount where="outside error">
-          {this.props.children}
-        </ChecksMountAndUnmount>
-      </React.Fragment>
-    );
-  }
-}
+import ErrorBoundaryProvider from "./ErrorBoundaryProvider";
 
 const Form = () => {
   const [username, setUsername] = React.useState("");
@@ -52,7 +11,7 @@ const Form = () => {
 
   username === "fail" &&
     (() => {
-      throw Error("neu");
+      throw Error("Generic Error");
     })();
 
   return (
@@ -63,10 +22,14 @@ const Form = () => {
   );
 };
 
+const CustomComponent = () => {
+  return <div>this is a custom error</div>;
+};
+
 function App() {
   return (
-    <ErrorBoundaryProvider>
-      <Form />
+    <ErrorBoundaryProvider fallback={<CustomComponent />}>
+      <Form key="aqueleForm" />
     </ErrorBoundaryProvider>
   );
 }
